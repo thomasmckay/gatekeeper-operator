@@ -65,6 +65,16 @@ type GatekeeperSpec struct {
 	// +operator-sdk:csv:customresourcedefinitions:type=spec,displayName="Pod Annotations"
 	// +optional
 	PodAnnotations map[string]string `json:"podAnnotations,omitempty"`
+
+	// +operator-sdk:csv:customresourcedefinitions:type=spec,displayName="Exempt Namespaces"
+	// +optional
+	//ExemptNamespaces []string `json:"exemptNamespaces,omitempty"`
+	ExemptNamespaces *ExemptNamespacesConfig `json:"exemptNamespaces,omitempty"`
+}
+
+type ExemptNamespacesConfig struct {
+	// ???? stuff
+	ExemptNamespaces []string `json:"exemptNamespaces,omitempty"`
 }
 
 type ImageConfig struct {

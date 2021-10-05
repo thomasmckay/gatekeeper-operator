@@ -926,6 +926,15 @@ spec:
                         type: object
                     type: object
                 type: object
+              exemptNamespaces:
+                description: ExemptNamespaces []string `json:"exemptNamespaces,omitempty"`
+                properties:
+                  exemptNamespaces:
+                    description: ???? stuff
+                    items:
+                      type: string
+                    type: array
+                type: object
               image:
                 properties:
                   image:

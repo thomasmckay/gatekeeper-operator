@@ -468,6 +468,7 @@ var commonSpecOverridesFn = []func(*unstructured.Unstructured, operatorv1alpha1.
 	setTolerations,
 	containerOverrides,
 	setEnableMutation,
+	setExemptNamespaces,
 }
 var commonContainerOverridesFn = []func(map[string]interface{}, operatorv1alpha1.GatekeeperSpec) error{
 	setImage,
@@ -530,6 +531,12 @@ func crOverrides(gatekeeper *operatorv1alpha1.Gatekeeper, asset string, obj *uns
 				return err
 			}
 		}
+		/*
+			case ExemptNamespaces:
+				if err := exemptNamespacesOverrides(obj, gatekeeper.Spec.ExemptNamespaces, ExemptNamespaces, true, controllerDeploymentPending); err != nil {
+					return err
+				}
+		*/
 	}
 	return nil
 }
@@ -615,6 +622,32 @@ func webhookConfigurationOverrides(obj *unstructured.Unstructured, webhook *oper
 			return err
 		}
 	}
+	return nil
+}
+
+func exemptNamespacesOverrides(obj *unstructured.Unstructured, exemptNamespaces *operatorv1alpha1.ExemptNamespacesConfig, namespaces map[string]string, updateFailurePolicy bool, controllerDeploymentPending bool) error {
+	// Set failure policy to ignore if deployment is still pending.
+	/*
+		if controllerDeploymentPending {
+			ignore := admregv1.Ignore
+			failurePolicy := &ignore
+			if err := setFailurePolicy(obj, failurePolicy, namespaces); err != nil {
+				return err
+			}
+		}
+
+		if webhook != nil {
+			if updateFailurePolicy && !controllerDeploymentPending {
+				failurePolicy := exemptNamespaces.FailurePolicy
+				if err := setFailurePolicy(obj, failurePolicy, namespaces); err != nil {
+					return err
+				}
+			}
+			if err := setExemptNamespaces(obj, webhook.NamespaceSelector, webhookName); err != nil {
+				return err
+			}
+		}
+	*/
 	return nil
 }
 
@@ -860,6 +893,16 @@ func setPodAnnotations(obj *unstructured.Unstructured, spec operatorv1alpha1.Gat
 	if spec.PodAnnotations != nil {
 		if err := unstructured.SetNestedStringMap(obj.Object, spec.PodAnnotations, "spec", "template", "metadata", "annotations"); err != nil {
 			return errors.Wrapf(err, "Failed to set podAnnotations")
+		}
+	}
+	return nil
+}
+
+func setExemptNamespaces(obj *unstructured.Unstructured, spec operatorv1alpha1.GatekeeperSpec) error {
+	if spec.ExemptNamespaces != nil {
+		//namespaces := make([]interface{}, len(spec.ExemptNamespaces))
+		for _, namespace := range spec.ExemptNamespaces.ExemptNamespaces {
+			setContainerArg(obj, managerContainer, ExemptNamespaceArg, namespace, false)
 		}
 	}
 	return nil
