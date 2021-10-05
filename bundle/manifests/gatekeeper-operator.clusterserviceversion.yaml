@@ -37,8 +37,7 @@ spec:
         path: affinity
       - displayName: Audit Configuration
         path: audit
-      - description: ExemptNamespaces []string `json:"exemptNamespaces,omitempty"`
-        displayName: Exempt Namespaces
+      - displayName: Exempt Namespaces
         path: exemptNamespaces
       - displayName: Image Configuration
         path: image

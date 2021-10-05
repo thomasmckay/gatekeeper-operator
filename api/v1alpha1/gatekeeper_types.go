@@ -68,14 +68,16 @@ type GatekeeperSpec struct {
 
 	// +operator-sdk:csv:customresourcedefinitions:type=spec,displayName="Exempt Namespaces"
 	// +optional
-	//ExemptNamespaces []string `json:"exemptNamespaces,omitempty"`
-	ExemptNamespaces *ExemptNamespacesConfig `json:"exemptNamespaces,omitempty"`
+	ExemptNamespaces []string `json:"exemptNamespaces,omitempty"`
 }
 
+/*
+???? ExemptNamespaces *ExemptNamespacesConfig `json:"exemptNamespaces,omitempty"`
 type ExemptNamespacesConfig struct {
 	// ???? stuff
 	ExemptNamespaces []string `json:"exemptNamespaces,omitempty"`
 }
+*/
 
 type ImageConfig struct {
 	// DEPRECATED: Image is deprecated. Its continued use will be honored by

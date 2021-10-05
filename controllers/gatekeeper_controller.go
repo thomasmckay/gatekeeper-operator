@@ -625,32 +625,6 @@ func webhookConfigurationOverrides(obj *unstructured.Unstructured, webhook *oper
 	return nil
 }
 
-func exemptNamespacesOverrides(obj *unstructured.Unstructured, exemptNamespaces *operatorv1alpha1.ExemptNamespacesConfig, namespaces map[string]string, updateFailurePolicy bool, controllerDeploymentPending bool) error {
-	// Set failure policy to ignore if deployment is still pending.
-	/*
-		if controllerDeploymentPending {
-			ignore := admregv1.Ignore
-			failurePolicy := &ignore
-			if err := setFailurePolicy(obj, failurePolicy, namespaces); err != nil {
-				return err
-			}
-		}
-
-		if webhook != nil {
-			if updateFailurePolicy && !controllerDeploymentPending {
-				failurePolicy := exemptNamespaces.FailurePolicy
-				if err := setFailurePolicy(obj, failurePolicy, namespaces); err != nil {
-					return err
-				}
-			}
-			if err := setExemptNamespaces(obj, webhook.NamespaceSelector, webhookName); err != nil {
-				return err
-			}
-		}
-	*/
-	return nil
-}
-
 type matchRuleFunc func(map[string]interface{}) (bool, error)
 
 var matchMutatingRBACRuleFns = []matchRuleFunc{
@@ -900,8 +874,7 @@ func setPodAnnotations(obj *unstructured.Unstructured, spec operatorv1alpha1.Gat
 
 func setExemptNamespaces(obj *unstructured.Unstructured, spec operatorv1alpha1.GatekeeperSpec) error {
 	if spec.ExemptNamespaces != nil {
-		//namespaces := make([]interface{}, len(spec.ExemptNamespaces))
-		for _, namespace := range spec.ExemptNamespaces.ExemptNamespaces {
+		for _, namespace := range spec.ExemptNamespaces {
 			setContainerArg(obj, managerContainer, ExemptNamespaceArg, namespace, true)
 		}
 	}
