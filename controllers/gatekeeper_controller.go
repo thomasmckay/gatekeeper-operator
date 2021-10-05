@@ -902,7 +902,7 @@ func setExemptNamespaces(obj *unstructured.Unstructured, spec operatorv1alpha1.G
 	if spec.ExemptNamespaces != nil {
 		//namespaces := make([]interface{}, len(spec.ExemptNamespaces))
 		for _, namespace := range spec.ExemptNamespaces.ExemptNamespaces {
-			setContainerArg(obj, managerContainer, ExemptNamespaceArg, namespace, false)
+			setContainerArg(obj, managerContainer, ExemptNamespaceArg, namespace, true)
 		}
 	}
 	return nil
@@ -1035,7 +1035,7 @@ func setControllerManagerExceptNamespace(obj *unstructured.Unstructured, asset, 
 	if asset != WebhookFile {
 		return nil
 	}
-	return setContainerArg(obj, managerContainer, ExemptNamespaceArg, namespace, false)
+	return setContainerArg(obj, managerContainer, ExemptNamespaceArg, namespace, true)
 }
 
 func setRoleBindingSubjectNamespace(obj *unstructured.Unstructured, asset, namespace string) error {
