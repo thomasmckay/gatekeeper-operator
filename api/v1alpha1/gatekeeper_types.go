@@ -68,6 +68,9 @@ type GatekeeperSpec struct {
 
 	// +operator-sdk:csv:customresourcedefinitions:type=spec,displayName="Exempt Namespaces"
 	// +optional
+        // Gatekeeper's webhook will not be called by the API server for any resource in the
+        // specified exempted namespaces. That means that Gatekeeper being down should have
+        // no effect on requests for that namespace.
 	ExemptNamespaces []string `json:"exemptNamespaces,omitempty"`
 }
 
