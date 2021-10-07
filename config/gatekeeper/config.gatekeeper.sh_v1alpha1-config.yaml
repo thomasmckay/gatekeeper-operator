@@ -1,0 +1,11 @@
+apiVersion: config.gatekeeper.sh/v1alpha1
+kind: Config
+metadata:
+  labels:
+    gatekeeper.sh/system: "yes"
+  name: config
+  namespace: gatekeeper-system
+spec:
+  match:
+    - excludedNamespaces: ["abc", "def"]
+      processes: ["*"]

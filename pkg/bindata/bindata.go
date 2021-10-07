@@ -11,6 +11,7 @@
 // config/gatekeeper/apiextensions.k8s.io_v1_customresourcedefinition_mutatorpodstatuses.status.gatekeeper.sh.yaml
 // config/gatekeeper/apps_v1_deployment_gatekeeper-audit.yaml
 // config/gatekeeper/apps_v1_deployment_gatekeeper-controller-manager.yaml
+// config/gatekeeper/config.gatekeeper.sh_v1alpha1-config.yaml
 // config/gatekeeper/openshift/rbac.authorization.k8s.io_v1_role_gatekeeper-manager-role.yaml
 // config/gatekeeper/policy_v1beta1_poddisruptionbudget_gatekeeper-controller-manager.yaml
 // config/gatekeeper/policy_v1beta1_podsecuritypolicy_gatekeeper-admin.yaml
@@ -1618,6 +1619,33 @@ func configGatekeeperApps_v1_deployment_gatekeeperControllerManagerYaml() (*asse
 	return a, nil
 }
 
+var _configGatekeeperConfigGatekeeperSh_v1alpha1ConfigYaml = []byte(`apiVersion: config.gatekeeper.sh/v1alpha1
+kind: Config
+metadata:
+  labels:
+    gatekeeper.sh/system: "yes"
+  name: config
+  namespace: gatekeeper-system
+spec:
+  match:
+    - excludedNamespaces: ["abc", "def"]
+      processes: ["*"]`)
+
+func configGatekeeperConfigGatekeeperSh_v1alpha1ConfigYamlBytes() ([]byte, error) {
+	return _configGatekeeperConfigGatekeeperSh_v1alpha1ConfigYaml, nil
+}
+
+func configGatekeeperConfigGatekeeperSh_v1alpha1ConfigYaml() (*asset, error) {
+	bytes, err := configGatekeeperConfigGatekeeperSh_v1alpha1ConfigYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "config/gatekeeper/config.gatekeeper.sh_v1alpha1-config.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 var _configGatekeeperOpenshiftRbacAuthorizationK8sIo_v1_role_gatekeeperManagerRoleYaml = []byte(`apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -2225,6 +2253,7 @@ var _bindata = map[string]func() (*asset, error){
 	"config/gatekeeper/apiextensions.k8s.io_v1_customresourcedefinition_mutatorpodstatuses.status.gatekeeper.sh.yaml":                   configGatekeeperApiextensionsK8sIo_v1_customresourcedefinition_mutatorpodstatusesStatusGatekeeperShYaml,
 	"config/gatekeeper/apps_v1_deployment_gatekeeper-audit.yaml":                                                                        configGatekeeperApps_v1_deployment_gatekeeperAuditYaml,
 	"config/gatekeeper/apps_v1_deployment_gatekeeper-controller-manager.yaml":                                                           configGatekeeperApps_v1_deployment_gatekeeperControllerManagerYaml,
+	"config/gatekeeper/config.gatekeeper.sh_v1alpha1-config.yaml":                                                                       configGatekeeperConfigGatekeeperSh_v1alpha1ConfigYaml,
 	"config/gatekeeper/openshift/rbac.authorization.k8s.io_v1_role_gatekeeper-manager-role.yaml":                                        configGatekeeperOpenshiftRbacAuthorizationK8sIo_v1_role_gatekeeperManagerRoleYaml,
 	"config/gatekeeper/policy_v1beta1_poddisruptionbudget_gatekeeper-controller-manager.yaml":                                           configGatekeeperPolicy_v1beta1_poddisruptionbudget_gatekeeperControllerManagerYaml,
 	"config/gatekeeper/policy_v1beta1_podsecuritypolicy_gatekeeper-admin.yaml":                                                          configGatekeeperPolicy_v1beta1_podsecuritypolicy_gatekeeperAdminYaml,
@@ -2293,6 +2322,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"apiextensions.k8s.io_v1_customresourcedefinition_mutatorpodstatuses.status.gatekeeper.sh.yaml":                   {configGatekeeperApiextensionsK8sIo_v1_customresourcedefinition_mutatorpodstatusesStatusGatekeeperShYaml, map[string]*bintree{}},
 			"apps_v1_deployment_gatekeeper-audit.yaml":                                                                        {configGatekeeperApps_v1_deployment_gatekeeperAuditYaml, map[string]*bintree{}},
 			"apps_v1_deployment_gatekeeper-controller-manager.yaml":                                                           {configGatekeeperApps_v1_deployment_gatekeeperControllerManagerYaml, map[string]*bintree{}},
+			"config.gatekeeper.sh_v1alpha1-config.yaml":                                                                       {configGatekeeperConfigGatekeeperSh_v1alpha1ConfigYaml, map[string]*bintree{}},
 			"openshift": {nil, map[string]*bintree{
 				"rbac.authorization.k8s.io_v1_role_gatekeeper-manager-role.yaml": {configGatekeeperOpenshiftRbacAuthorizationK8sIo_v1_role_gatekeeperManagerRoleYaml, map[string]*bintree{}},
 			}},

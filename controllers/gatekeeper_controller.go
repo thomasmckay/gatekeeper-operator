@@ -58,6 +58,8 @@ const (
 	RoleFile                          = "rbac.authorization.k8s.io_v1_role_gatekeeper-manager-role.yaml"
 	RoleBindingFile                   = "rbac.authorization.k8s.io_v1_rolebinding_gatekeeper-manager-rolebinding.yaml"
 	ServerCertFile                    = "v1_secret_gatekeeper-webhook-server-cert.yaml"
+	ConfigCRDFile                     = "apiextensions.k8s.io_v1_customresourcedefinition_configs.config.gatekeeper.sh.yaml"
+	ConfigFile                        = "config.gatekeeper.sh_v1alpha1-config.yaml"
 	ValidatingWebhookConfiguration    = "admissionregistration.k8s.io_v1_validatingwebhookconfiguration_gatekeeper-validating-webhook-configuration.yaml"
 	MutatingWebhookConfiguration      = "admissionregistration.k8s.io_v1_mutatingwebhookconfiguration_gatekeeper-mutating-webhook-configuration.yaml"
 	ValidationGatekeeperWebhook       = "validation.gatekeeper.sh"
@@ -84,7 +86,7 @@ var (
 	orderedStaticAssets = []string{
 		NamespaceFile,
 		"v1_resourcequota_gatekeeper-critical-pods.yaml",
-		"apiextensions.k8s.io_v1_customresourcedefinition_configs.config.gatekeeper.sh.yaml",
+		ConfigCRDFile,
 		"apiextensions.k8s.io_v1_customresourcedefinition_constrainttemplates.templates.gatekeeper.sh.yaml",
 		"apiextensions.k8s.io_v1_customresourcedefinition_constrainttemplatepodstatuses.status.gatekeeper.sh.yaml",
 		"apiextensions.k8s.io_v1_customresourcedefinition_constraintpodstatuses.status.gatekeeper.sh.yaml",
@@ -102,6 +104,7 @@ var (
 		AuditFile,
 		WebhookFile,
 		"v1_service_gatekeeper-webhook-service.yaml",
+		ConfigFile,
 	}
 	webhookStaticAssets = []string{
 		ValidatingWebhookConfiguration,
