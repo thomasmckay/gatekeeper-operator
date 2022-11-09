@@ -309,7 +309,7 @@ spec:
                 env:
                 - name: RELATED_IMAGE_GATEKEEPER
                   value: openpolicyagent/gatekeeper:v3.5.2
-                image: quay.io/thomasmckay/gatekeeper-operator:devel
+                image: quay.io/gatekeeper/gatekeeper-operator:v0.2.4
                 imagePullPolicy: IfNotPresent
                 livenessProbe:
                   httpGet:
@@ -397,15 +397,6 @@ spec:
           - patch
           - update
           - watch
-        - apiGroups:
-          - policy
-          resources:
-          - poddisruptionbudgets
-          verbs:
-          - create
-          - delete
-          - update
-          - use
         - apiGroups:
           - rbac.authorization.k8s.io
           resources:
