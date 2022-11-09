@@ -16,9 +16,9 @@ metadata:
         }
       ]
     capabilities: Basic Install
-    operators.operatorframework.io/builder: operator-sdk-v1.13.0+git
+    operators.operatorframework.io/builder: operator-sdk-v1.9.0+git
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
-  name: gatekeeper-operator.v0.2.2
+  name: gatekeeper-operator.v0.2.4
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -200,15 +200,6 @@ spec:
           - patch
           - update
         - apiGroups:
-          - policy
-          resources:
-          - podsecuritypolicies
-          verbs:
-          - create
-          - delete
-          - update
-          - use
-        - apiGroups:
           - rbac.authorization.k8s.io
           resources:
           - clusterrolebindings
@@ -318,8 +309,8 @@ spec:
                 env:
                 - name: RELATED_IMAGE_GATEKEEPER
                   value: openpolicyagent/gatekeeper:v3.5.2
-                image: quay.io/gatekeeper/gatekeeper-operator:v0.2.2
-                imagePullPolicy: Always
+                image: quay.io/thomasmckay/gatekeeper-operator:devel
+                imagePullPolicy: IfNotPresent
                 livenessProbe:
                   httpGet:
                     path: /healthz
@@ -450,5 +441,5 @@ spec:
   maturity: alpha
   provider:
     name: Red Hat
-  replaces: gatekeeper-operator.v0.2.1
-  version: 0.2.2
+  replaces: gatekeeper-operator.v0.2.0
+  version: 0.2.4

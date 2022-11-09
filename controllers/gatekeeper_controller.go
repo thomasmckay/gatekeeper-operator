@@ -93,7 +93,6 @@ var (
 		MutatorPodStatusCRDFile,
 		ServerCertFile,
 		"v1_serviceaccount_gatekeeper-admin.yaml",
-		"policy_v1beta1_podsecuritypolicy_gatekeeper-admin.yaml",
 		"policy_v1beta1_poddisruptionbudget_gatekeeper-controller-manager.yaml",
 		ClusterRoleFile,
 		ClusterRoleBindingFile,
